@@ -1,0 +1,2068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduTrack - Create Account</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: #fafafa;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #262626;
+
+            padding: 20px;
+        }
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+        .page-wrapper {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        /* =====================================================
+           CARD
+        ===================================================== */
+
+        .register-card {
+            background: #ffffff;
+
+            border: 1px solid #dbdbdb;
+
+            border-radius: 8px;
+
+            padding: 35px 40px 30px;
+
+            width: 100%;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .logo {
+            text-align: center;
+
+            font-size: 34px;
+
+            font-weight: 700;
+
+            letter-spacing: -1.5px;
+
+            color: #262626;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            font-size: 14px;
+
+            color: #8e8e8e;
+
+            margin-bottom: 28px;
+        }
+
+        /* =====================================================
+           STEP INDICATOR
+        ===================================================== */
+
+        .step-indicator {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 25px;
+        }
+
+        .step {
+            width: 26px;
+            height: 26px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            background: #efefef;
+
+            color: #8e8e8e;
+        }
+
+        .step.active {
+            background: #0095f6;
+
+            color: white;
+        }
+
+        .step-line {
+            width: 45px;
+
+            height: 1px;
+
+            background: #dbdbdb;
+        }
+
+        /* =====================================================
+           ROLE SELECTION
+        ===================================================== */
+
+        #roleSection {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+        }
+
+        .role-container {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .role-button {
+            width: 100%;
+
+            min-height: 58px;
+
+            border: 1px solid #dbdbdb;
+
+            border-radius: 8px;
+
+            background: white;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 12px 15px;
+
+            transition:
+                background 0.2s,
+                border 0.2s,
+                transform 0.2s;
+        }
+
+        .role-button:hover {
+            background: #fafafa;
+
+            border-color: #0095f6;
+
+            transform: translateY(-1px);
+        }
+
+        .role-icon {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: #f0f7ff;
+
+            color: #0095f6;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            margin-right: 12px;
+        }
+
+        .role-content {
+            text-align: left;
+        }
+
+        .role-title {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #262626;
+        }
+
+        .role-description {
+            font-size: 11px;
+
+            color: #8e8e8e;
+
+            margin-top: 2px;
+        }
+
+        /* =====================================================
+           FORM SECTION
+        ===================================================== */
+
+        #formSection {
+            display: none;
+        }
+
+        .selected-role {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+
+            padding: 10px;
+
+            background: #f7f7f7;
+
+            border-radius: 7px;
+        }
+
+        .selected-role-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: #0095f6;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .selected-role-text {
+            flex: 1;
+        }
+
+        .selected-role-label {
+            font-size: 10px;
+
+            color: #8e8e8e;
+        }
+
+        .selected-role-name {
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .change-role {
+            border: none;
+
+            background: transparent;
+
+            color: #0095f6;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .input-label {
+            display: block;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            color: #555;
+
+            margin-bottom: 4px;
+        }
+
+        .input-field,
+        .select-field {
+            width: 100%;
+
+            height: 38px;
+
+            padding: 8px;
+
+            border: 1px solid #dbdbdb;
+
+            border-radius: 4px;
+
+            background: #fafafa;
+
+            font-size: 12px;
+
+            color: #262626;
+
+            outline: none;
+        }
+
+        .input-field:focus,
+        .select-field:focus {
+            background: white;
+
+            border-color: #a8a8a8;
+        }
+
+        .input-field::placeholder {
+            color: #8e8e8e;
+        }
+
+        /* =====================================================
+           PASSWORD
+        ===================================================== */
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper .input-field {
+            padding-right: 48px;
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 8px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #262626;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        .submit-button {
+            width: 100%;
+
+            height: 36px;
+
+            margin-top: 12px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #0095f6;
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: opacity 0.2s;
+        }
+
+        .submit-button:hover {
+            opacity: 0.85;
+        }
+
+        .submit-button:disabled {
+            opacity: 0.5;
+
+            cursor: not-allowed;
+        }
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-button {
+            width: 100%;
+
+            height: 36px;
+
+            margin-top: 8px;
+
+            border: 1px solid #dbdbdb;
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #262626;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #fafafa;
+        }
+
+        /* =====================================================
+           MESSAGES
+        ===================================================== */
+
+        .message {
+            display: none;
+
+            font-size: 11px;
+
+            line-height: 15px;
+
+            margin-top: 10px;
+
+            text-align: center;
+        }
+
+        .error-message {
+            color: #ed4956;
+        }
+
+        .success-message {
+            color: #16833b;
+        }
+
+        /* =====================================================
+           LOGIN LINK
+        ===================================================== */
+
+        .login-box {
+            margin-top: 12px;
+
+            padding: 20px;
+
+            background: #ffffff;
+
+            border: 1px solid #dbdbdb;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            color: #262626;
+        }
+
+        .login-link {
+            color: #0095f6;
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 20px;
+
+            font-size: 10px;
+
+            color: #8e8e8e;
+        }
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .loading {
+            display: none;
+
+            width: 14px;
+            height: 14px;
+
+            border: 2px solid rgba(255,255,255,0.5);
+
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            animation: spin 0.7s linear infinite;
+
+            margin: auto;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 0;
+
+                background: white;
+            }
+
+            .register-card {
+                border: none;
+
+                padding: 30px 20px;
+            }
+
+        }
+
+        @media (max-width: 350px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <div class="register-card">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="logo">
+            EduTrack
+        </div>
+
+        <div class="subtitle">
+            Create your account
+        </div>
+
+
+        <!-- =================================================
+             STEP INDICATOR
+        ================================================== -->
+
+        <div class="step-indicator">
+
+            <div
+                id="step1"
+                class="step active"
+            >
+                1
+            </div>
+
+            <div class="step-line"></div>
+
+            <div
+                id="step2"
+                class="step"
+            >
+                2
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ROLE SELECTION
+        ================================================== -->
+
+        <section id="roleSection">
+
+            <div class="section-title">
+                Choose your account type
+            </div>
+
+            <div class="role-container">
+
+                <!-- STUDENT -->
+
+                <button
+                    type="button"
+                    class="role-button"
+                    onclick="selectRole('student')"
+                >
+
+                    <div class="role-icon">
+                        S
+                    </div>
+
+                    <div class="role-content">
+
+                        <div class="role-title">
+                            Student
+                        </div>
+
+                        <div class="role-description">
+                            Access attendance, marks and profile
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+                <!-- LECTURER -->
+
+                <button
+                    type="button"
+                    class="role-button"
+                    onclick="selectRole('lecturer')"
+                >
+
+                    <div class="role-icon">
+                        L
+                    </div>
+
+                    <div class="role-content">
+
+                        <div class="role-title">
+                            Lecturer
+                        </div>
+
+                        <div class="role-description">
+                            Manage subjects, attendance and marks
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+                <!-- HOD -->
+
+                <button
+                    type="button"
+                    class="role-button"
+                    onclick="selectRole('hod')"
+                >
+
+                    <div class="role-icon">
+                        H
+                    </div>
+
+                    <div class="role-content">
+
+                        <div class="role-title">
+                            HOD
+                        </div>
+
+                        <div class="role-description">
+                            Department and academic administration
+                        </div>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REGISTRATION FORM
+        ================================================== -->
+
+        <section id="formSection">
+
+            <!-- SELECTED ROLE -->
+
+            <div class="selected-role">
+
+                <div
+                    id="selectedRoleIcon"
+                    class="selected-role-icon"
+                >
+                    S
+                </div>
+
+                <div class="selected-role-text">
+
+                    <div class="selected-role-label">
+                        Account Type
+                    </div>
+
+                    <div
+                        id="selectedRoleName"
+                        class="selected-role-name"
+                    >
+                        Student
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="change-role"
+                    onclick="changeRole()"
+                >
+                    Change
+                </button>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="registrationForm">
+
+                <div
+                    id="formFields"
+                    class="form-grid"
+                >
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="errorMessage"
+                    class="message error-message"
+                ></div>
+
+
+                <!-- SUCCESS -->
+
+                <div
+                    id="successMessage"
+                    class="message success-message"
+                ></div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    id="createButton"
+                    class="submit-button"
+                >
+
+                    <span id="createText">
+                        Create Account
+                    </span>
+
+                    <span
+                        id="loading"
+                        class="loading"
+                    ></span>
+
+                </button>
+
+            </form>
+
+
+            <!-- BACK -->
+
+            <button
+                type="button"
+                class="back-button"
+                onclick="changeRole()"
+            >
+                Back
+            </button>
+
+        </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         LOGIN LINK
+    ====================================================== -->
+
+    <div class="login-box">
+
+        Already have an account?
+
+        <a
+            href="index.html"
+            class="login-link"
+        >
+            Log in
+        </a>
+
+    </div>
+
+
+    <div class="footer">
+        EduTrack Attendance Management System
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+    ============================================================
+        CONFIGURATION
+    ============================================================
+    */
+
+    const API_BASE_URL = "";
+
+
+    /*
+    ============================================================
+        CURRENT ROLE
+    ============================================================
+    */
+
+    let selectedRole = "";
+
+
+    /*
+    ============================================================
+        ELEMENTS
+    ============================================================
+    */
+
+    const roleSection =
+        document.getElementById("roleSection");
+
+    const formSection =
+        document.getElementById("formSection");
+
+    const formFields =
+        document.getElementById("formFields");
+
+    const registrationForm =
+        document.getElementById("registrationForm");
+
+    const selectedRoleIcon =
+        document.getElementById("selectedRoleIcon");
+
+    const selectedRoleName =
+        document.getElementById("selectedRoleName");
+
+    const errorMessage =
+        document.getElementById("errorMessage");
+
+    const successMessage =
+        document.getElementById("successMessage");
+
+    const createButton =
+        document.getElementById("createButton");
+
+    const createText =
+        document.getElementById("createText");
+
+    const loading =
+        document.getElementById("loading");
+
+
+    /*
+    ============================================================
+        SELECT ROLE
+    ============================================================
+    */
+
+    function selectRole(role) {
+
+        selectedRole = role;
+
+        roleSection.style.display = "none";
+
+        formSection.style.display = "block";
+
+        document.getElementById("step1")
+            .classList.remove("active");
+
+        document.getElementById("step2")
+            .classList.add("active");
+
+        clearMessages();
+
+        updateSelectedRole();
+
+        buildRegistrationForm(role);
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /*
+    ============================================================
+        UPDATE ROLE DISPLAY
+    ============================================================
+    */
+
+    function updateSelectedRole() {
+
+        if (selectedRole === "student") {
+
+            selectedRoleIcon.textContent = "S";
+
+            selectedRoleName.textContent =
+                "Student";
+
+        }
+
+        else if (selectedRole === "lecturer") {
+
+            selectedRoleIcon.textContent = "L";
+
+            selectedRoleName.textContent =
+                "Lecturer";
+
+        }
+
+        else if (selectedRole === "hod") {
+
+            selectedRoleIcon.textContent = "H";
+
+            selectedRoleName.textContent =
+                "HOD";
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+        CHANGE ROLE
+    ============================================================
+    */
+
+    function changeRole() {
+
+        selectedRole = "";
+
+        formFields.innerHTML = "";
+
+        registrationForm.reset();
+
+        formSection.style.display = "none";
+
+        roleSection.style.display = "block";
+
+        document.getElementById("step1")
+            .classList.add("active");
+
+        document.getElementById("step2")
+            .classList.remove("active");
+
+        clearMessages();
+
+    }
+
+
+    /*
+    ============================================================
+        BUILD REGISTRATION FORM
+    ============================================================
+    */
+
+    function buildRegistrationForm(role) {
+
+        let html = "";
+
+
+        /*
+        ========================================================
+            STUDENT FORM
+        ========================================================
+        */
+
+        if (role === "student") {
+
+            html = `
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="full_name"
+                        class="input-field"
+                        placeholder="Enter full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Student ID
+                    </label>
+
+                    <input
+                        type="text"
+                        name="student_id"
+                        class="input-field"
+                        placeholder="STU0001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Roll Number
+                    </label>
+
+                    <input
+                        type="text"
+                        name="roll_number"
+                        class="input-field"
+                        placeholder="23A001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="input-field"
+                        placeholder="student@example.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="mobile"
+                        class="input-field"
+                        placeholder="Mobile number"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Department
+                    </label>
+
+                    <input
+                        type="text"
+                        name="department"
+                        class="input-field"
+                        placeholder="Computer Science"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Course
+                    </label>
+
+                    <input
+                        type="text"
+                        name="course"
+                        class="input-field"
+                        placeholder="B.Sc Computer Science"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Academic Group
+                    </label>
+
+                    <input
+                        type="text"
+                        name="academic_group"
+                        class="input-field"
+                        placeholder="B.Sc CS - A"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Current Year
+                    </label>
+
+                    <select
+                        name="current_year"
+                        class="select-field"
+                        required
+                    >
+
+                        <option value="">
+                            Select year
+                        </option>
+
+                        <option value="1st Year">
+                            1st Year
+                        </option>
+
+                        <option value="2nd Year">
+                            2nd Year
+                        </option>
+
+                        <option value="3rd Year">
+                            3rd Year
+                        </option>
+
+                        <option value="4th Year">
+                            4th Year
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Semester
+                    </label>
+
+                    <select
+                        name="semester"
+                        class="select-field"
+                        required
+                    >
+
+                        <option value="">
+                            Select semester
+                        </option>
+
+                        <option value="1">
+                            Semester 1
+                        </option>
+
+                        <option value="2">
+                            Semester 2
+                        </option>
+
+                        <option value="3">
+                            Semester 3
+                        </option>
+
+                        <option value="4">
+                            Semester 4
+                        </option>
+
+                        <option value="5">
+                            Semester 5
+                        </option>
+
+                        <option value="6">
+                            Semester 6
+                        </option>
+
+                        <option value="7">
+                            Semester 7
+                        </option>
+
+                        <option value="8">
+                            Semester 8
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        College Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="college_name"
+                        class="input-field"
+                        placeholder="College name"
+                        required
+                    >
+
+                </div>
+
+
+                ${passwordFields()}
+
+            `;
+
+        }
+
+
+        /*
+        ========================================================
+            LECTURER FORM
+        ========================================================
+        */
+
+        else if (role === "lecturer") {
+
+            html = `
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="full_name"
+                        class="input-field"
+                        placeholder="Enter full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Faculty ID
+                    </label>
+
+                    <input
+                        type="text"
+                        name="faculty_id"
+                        class="input-field"
+                        placeholder="FAC001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="mobile"
+                        class="input-field"
+                        placeholder="Mobile number"
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="input-field"
+                        placeholder="lecturer@example.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Department
+                    </label>
+
+                    <input
+                        type="text"
+                        name="department"
+                        class="input-field"
+                        placeholder="Computer Science"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Designation
+                    </label>
+
+                    <input
+                        type="text"
+                        name="designation"
+                        class="input-field"
+                        placeholder="Assistant Professor"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        College Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="college_name"
+                        class="input-field"
+                        placeholder="College name"
+                        required
+                    >
+
+                </div>
+
+
+                ${passwordFields()}
+
+            `;
+
+        }
+
+
+        /*
+        ========================================================
+            HOD FORM
+        ========================================================
+        */
+
+        else if (role === "hod") {
+
+            html = `
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="full_name"
+                        class="input-field"
+                        placeholder="Enter full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        HOD ID
+                    </label>
+
+                    <input
+                        type="text"
+                        name="hod_id"
+                        class="input-field"
+                        placeholder="HOD001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="input-label">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="mobile"
+                        class="input-field"
+                        placeholder="Mobile number"
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="input-field"
+                        placeholder="hod@example.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        Department
+                    </label>
+
+                    <input
+                        type="text"
+                        name="department"
+                        class="input-field"
+                        placeholder="Computer Science"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label class="input-label">
+                        College Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="college_name"
+                        class="input-field"
+                        placeholder="College name"
+                        required
+                    >
+
+                </div>
+
+
+                ${passwordFields()}
+
+            `;
+
+        }
+
+
+        formFields.innerHTML = html;
+
+    }
+
+
+    /*
+    ============================================================
+        PASSWORD FIELDS
+    ============================================================
+    */
+
+    function passwordFields() {
+
+        return `
+
+            <div class="form-group">
+
+                <label class="input-label">
+                    Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="input-field"
+                        placeholder="Password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword('password', this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="input-label">
+                    Confirm Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirm_password"
+                        class="input-field"
+                        placeholder="Confirm password"
+                        minlength="6"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword('confirmPassword', this)"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+    ============================================================
+        PASSWORD TOGGLE
+    ============================================================
+    */
+
+    function togglePassword(inputId, button) {
+
+        const input =
+            document.getElementById(inputId);
+
+        if (!input) {
+            return;
+        }
+
+        if (input.type === "password") {
+
+            input.type = "text";
+
+            button.textContent = "Hide";
+
+        } else {
+
+            input.type = "password";
+
+            button.textContent = "Show";
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+        MESSAGE
+    ============================================================
+    */
+
+    function clearMessages() {
+
+        errorMessage.textContent = "";
+
+        errorMessage.style.display = "none";
+
+        successMessage.textContent = "";
+
+        successMessage.style.display = "none";
+
+    }
+
+
+    function showError(message) {
+
+        errorMessage.textContent = message;
+
+        errorMessage.style.display = "block";
+
+        successMessage.style.display = "none";
+
+    }
+
+
+    function showSuccess(message) {
+
+        successMessage.textContent = message;
+
+        successMessage.style.display = "block";
+
+        errorMessage.style.display = "none";
+
+    }
+
+
+    /*
+    ============================================================
+        LOADING
+    ============================================================
+    */
+
+    function setLoading(value) {
+
+        createButton.disabled = value;
+
+        if (value) {
+
+            createText.style.display = "none";
+
+            loading.style.display = "block";
+
+        } else {
+
+            createText.style.display = "inline";
+
+            loading.style.display = "none";
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+        COLLECT FORM DATA
+    ============================================================
+    */
+
+    function getFormData() {
+
+        const formData =
+            new FormData(registrationForm);
+
+        const data = {};
+
+        formData.forEach(function(value, key) {
+
+            data[key] = value;
+
+        });
+
+        data.role = selectedRole;
+
+        return data;
+
+    }
+
+
+    /*
+    ============================================================
+        VALIDATE FORM
+    ============================================================
+    */
+
+    function validateForm(data) {
+
+        if (!data.full_name) {
+
+            return "Please enter your full name.";
+
+        }
+
+
+        if (!data.email) {
+
+            return "Please enter your email.";
+
+        }
+
+
+        if (!data.password) {
+
+            return "Please enter a password.";
+
+        }
+
+
+        if (data.password.length < 6) {
+
+            return "Password must contain at least 6 characters.";
+
+        }
+
+
+        if (
+            !data.confirm_password
+        ) {
+
+            return "Please confirm your password.";
+
+        }
+
+
+        if (
+            data.password !==
+            data.confirm_password
+        ) {
+
+            return "Passwords do not match.";
+
+        }
+
+
+        if (selectedRole === "student") {
+
+            if (!data.student_id) {
+
+                return "Please enter Student ID.";
+
+            }
+
+            if (!data.roll_number) {
+
+                return "Please enter Roll Number.";
+
+            }
+
+            if (!data.department) {
+
+                return "Please enter Department.";
+
+            }
+
+            if (!data.course) {
+
+                return "Please enter Course.";
+
+            }
+
+            if (!data.academic_group) {
+
+                return "Please enter Academic Group.";
+
+            }
+
+            if (!data.current_year) {
+
+                return "Please select Current Year.";
+
+            }
+
+            if (!data.semester) {
+
+                return "Please select Semester.";
+
+            }
+
+        }
+
+
+        if (selectedRole === "lecturer") {
+
+            if (!data.faculty_id) {
+
+                return "Please enter Faculty ID.";
+
+            }
+
+            if (!data.department) {
+
+                return "Please enter Department.";
+
+            }
+
+            if (!data.designation) {
+
+                return "Please enter Designation.";
+
+            }
+
+        }
+
+
+        if (selectedRole === "hod") {
+
+            if (!data.hod_id) {
+
+                return "Please enter HOD ID.";
+
+            }
+
+            if (!data.department) {
+
+                return "Please enter Department.";
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    /*
+    ============================================================
+        REGISTER ACCOUNT
+    ============================================================
+    */
+
+    registrationForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            clearMessages();
+
+            const data =
+                getFormData();
+
+            const validationError =
+                validateForm(data);
+
+            if (validationError) {
+
+                showError(validationError);
+
+                return;
+
+            }
+
+            setLoading(true);
+
+
+            try {
+
+                /*
+                ------------------------------------------------
+                    SEND TO PYTHON FASTAPI
+                ------------------------------------------------
+                */
+
+                const response =
+                    await fetch(
+                        API_BASE_URL +
+                        "/api/register",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(data)
+                        }
+                    );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        result.detail ||
+                        result.message ||
+                        "Registration failed."
+                    );
+
+                }
+
+
+                /*
+                ------------------------------------------------
+                    SUCCESS
+                ------------------------------------------------
+                */
+
+                showSuccess(
+                    result.message ||
+                    "Account created successfully."
+                );
+
+
+                registrationForm.reset();
+
+
+                /*
+                ------------------------------------------------
+                    GO TO LOGIN
+                ------------------------------------------------
+                */
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "index.html";
+
+                }, 1500);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+
+                if (
+                    error instanceof TypeError &&
+                    error.message.includes("fetch")
+                ) {
+
+                    showError(
+                        "Unable to connect to the Python server."
+                    );
+
+                } else {
+
+                    showError(
+                        error.message ||
+                        "Registration failed. Please try again."
+                    );
+
+                }
+
+                setLoading(false);
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
