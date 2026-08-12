@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #262626;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 40px 40px 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 35px;
+            color: #262626;
+        }
+
+        .logo-subtitle {
+            font-size: 13px;
+            color: #8e8e8e;
+            margin-top: -27px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 8px;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 38px;
+            padding: 9px 8px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            background: #fafafa;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #a8a8a8;
+            background: #ffffff;
+        }
+
+        .input-field::placeholder {
+            color: #8e8e8e;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            color: #262626;
+            display: none;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 32px;
+            margin-top: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #0095f6;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .login-button:hover {
+            opacity: 0.85;
+        }
+
+        .login-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #dbdbdb;
+        }
+
+        .divider-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8e8e;
+        }
+
+        .create-account {
+            color: #0095f6;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .create-account:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            display: none;
+            margin-top: 12px;
+            color: #ed4956;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 12px;
+            color: #16833b;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .loading {
+            display: none;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.5);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #8e8e8e;
+            font-size: 11px;
+        }
+
+        @media (max-width: 450px) {
+            body {
+                background: #ffffff;
+            }
+
+            .page-wrapper {
+                padding: 0;
+            }
+
+            .login-container {
+                max-width: 350px;
+            }
+
+            .login-card {
+                border: none;
+                padding: 35px 25px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <div class="login-container">
+
+        <!-- LOGIN CARD -->
+        <div class="login-card">
+
+            <div class="logo">
+                EduTrack
+            </div>
+
+            <div class="logo-subtitle">
+                Attendance Manager
+            </div>
+
+            <form id="loginForm">
+
+                <!-- Username / Email -->
+                <div class="form-group">
+                    <input
+                        type="text"
+                        id="username"
+                        class="input-field"
+                        placeholder="Username or email"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+
+                <!-- Password -->
+                <div class="form-group password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="input-field"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="showPassword"
+                        class="show-password"
+                        onclick="togglePassword()"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+                <!-- Error -->
+                <div id="errorMessage" class="error-message"></div>
+
+                <!-- Success -->
+                <div id="successMessage" class="success-message"></div>
+
+                <!-- Login -->
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    <span id="loginText">Log In</span>
+
+                    <span
+                        id="loading"
+                        class="loading"
+                    ></span>
+                </button>
+
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-text">OR</div>
+                <div class="divider-line"></div>
+            </div>
+
+            <!-- Create Account -->
+            <a
+                href="register.html"
+                class="create-account"
+            >
+                Create Account
+            </a>
+
+        </div>
+
+        <div class="footer">
+            EduTrack Attendance Management System
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+    ============================================================
+        CONFIGURATION
+    ============================================================
+    */
+
+    // When frontend and FastAPI are served from the same server:
+    const API_BASE_URL = "";
+
+    /*
+    ============================================================
+        ELEMENTS
+    ============================================================
+    */
+
+    const loginForm = document.getElementById("loginForm");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+
+    const loginButton = document.getElementById("loginButton");
+    const loginText = document.getElementById("loginText");
+    const loading = document.getElementById("loading");
+
+    const errorMessage = document.getElementById("errorMessage");
+    const successMessage = document.getElementById("successMessage");
+
+    const showPasswordButton =
+        document.getElementById("showPassword");
+
+
+    /*
+    ============================================================
+        SHOW / HIDE PASSWORD BUTTON
+    ============================================================
+    */
+
+    passwordInput.addEventListener("input", function () {
+
+        if (passwordInput.value.length > 0) {
+            showPasswordButton.style.display = "block";
+        } else {
+            showPasswordButton.style.display = "none";
+        }
+
+    });
+
+
+    function togglePassword() {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+            showPasswordButton.textContent = "Hide";
+
+        } else {
+
+            passwordInput.type = "password";
+            showPasswordButton.textContent = "Show";
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+        MESSAGE FUNCTIONS
+    ============================================================
+    */
+
+    function showError(message) {
+
+        errorMessage.textContent = message;
+        errorMessage.style.display = "block";
+
+        successMessage.style.display = "none";
+    }
+
+
+    function showSuccess(message) {
+
+        successMessage.textContent = message;
+        successMessage.style.display = "block";
+
+        errorMessage.style.display = "none";
+    }
+
+
+    function clearMessages() {
+
+        errorMessage.textContent = "";
+        errorMessage.style.display = "none";
+
+        successMessage.textContent = "";
+        successMessage.style.display = "none";
+
+    }
+
+
+    /*
+    ============================================================
+        LOADING STATE
+    ============================================================
+    */
+
+    function setLoading(isLoading) {
+
+        loginButton.disabled = isLoading;
+
+        if (isLoading) {
+
+            loginText.style.display = "none";
+            loading.style.display = "block";
+
+        } else {
+
+            loginText.style.display = "inline";
+            loading.style.display = "none";
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+        LOGIN
+    ============================================================
+    */
+
+    loginForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        clearMessages();
+
+        const username =
+            usernameInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+        if (!username) {
+
+            showError("Please enter your username or email.");
+            usernameInput.focus();
+            return;
+
+        }
+
+        if (!password) {
+
+            showError("Please enter your password.");
+            passwordInput.focus();
+            return;
+
+        }
+
+        setLoading(true);
+
+        try {
+
+            const response = await fetch(
+                API_BASE_URL + "/api/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    data.message ||
+                    "Invalid username or password."
+                );
+
+            }
+
+
+            /*
+            ====================================================
+                SAVE LOGIN SESSION
+            ====================================================
+            */
+
+            if (data.access_token) {
+
+                localStorage.setItem(
+                    "access_token",
+                    data.access_token
+                );
+
+            }
+
+
+            if (data.user) {
+
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(data.user)
+                );
+
+            }
+
+
+            /*
+            ====================================================
+                ROLE BASED REDIRECTION
+            ====================================================
+            */
+
+            const role =
+                String(data.role || data.user?.role || "")
+                    .toLowerCase();
+
+
+            showSuccess("Login successful.");
+
+
+            setTimeout(function () {
+
+                if (role === "student") {
+
+                    window.location.href =
+                        "STUDENT.HTML";
+
+                }
+
+                else if (role === "lecturer") {
+
+                    window.location.href =
+                        "lec.html";
+
+                }
+
+                else if (role === "hod") {
+
+                    window.location.href =
+                        "hod.html";
+
+                }
+
+                else {
+
+                    showError(
+                        "Account role is not configured."
+                    );
+
+                    setLoading(false);
+
+                }
+
+            }, 500);
+
+
+        } catch (error) {
+
+            console.error("Login error:", error);
+
+            /*
+            ----------------------------------------------------
+                If backend is not running
+            ----------------------------------------------------
+            */
+
+            if (
+                error instanceof TypeError &&
+                error.message.includes("fetch")
+            ) {
+
+                showError(
+                    "Unable to connect to the server. Please start the Python backend."
+                );
+
+            } else {
+
+                showError(
+                    error.message ||
+                    "Login failed. Please try again."
+                );
+
+            }
+
+            setLoading(false);
+
+        }
+
+    });
+
+
+    /*
+    ============================================================
+        ENTER KEY SUPPORT
+    ============================================================
+    */
+
+    usernameInput.addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            passwordInput.focus();
+        }
+
+    });
+
+
+    /*
+    ============================================================
+        CHECK EXISTING LOGIN
+    ============================================================
+    */
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const token =
+            localStorage.getItem("access_token");
+
+        const user =
+            localStorage.getItem("user");
+
+        /*
+        Do not automatically redirect here.
+        The user can always see the login page.
+        */
+
+        console.log(
+            "EduTrack Login Page Loaded"
+        );
+
+    });
+
+</script>
+
+</body>
+</html>
